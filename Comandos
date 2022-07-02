@@ -1,0 +1,4 @@
+CREATE TABLE `api_flask`.`curso` (`codigo` CHAR(6) NOT NULL , 
+`nombre` VARCHAR(30) NOT NULL , `creditos` TINYINT(1) NOT NULL ) ENGINE = InnoDB;
+ALTER TABLE `curso` ADD PRIMARY KEY(`codigo`);
+INSERT INTO `curso` (`codigo`, `nombre`, `creditos`) VALUES ('235821', 'Lenguaje', '3');
