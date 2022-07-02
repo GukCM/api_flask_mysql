@@ -56,10 +56,12 @@ def leer_curso(codigo):
 def registrar_curso():
     # print(request.json)
     try:
+        #Consulta similar a las anteriores, utilizando request.json para traer un valor en formato json, de esta manera ingresarlo a la BD
         cursor=conexion.connection.cursor()
         sql= """INSERT INTO curso (codigo, nombre, creditos) 
         VALUES ('{0}','{1}', {2})""".format(request.json['codigo'],request.json['nombre'],request.json['creditos'])
         cursor.execute(sql)
+        #En este caso tenemos un commit, para realizar la acción y confirmarla
         conexion.connection.commit() #Confirma la acción que se va realizar
         return jsonify({'mensaje': "Curso Registrado"})
     except Exception as ex:
@@ -68,6 +70,7 @@ def registrar_curso():
 @app.route('/cursos/<codigo>', methods=['PUT'])
 def actualizar_curso(codigo):
     try:
+        #Notese que en este caso, tenemos la variable codigo, en formato url, no en formato json, esto porque el valor se nos da por medio de la url 
         cursor=conexion.connection.cursor()
         sql = """UPDATE curso SET nombre = '{0}', creditos = '{1}' 
         WHERE codigo = '{2}'""".format(request.json['nombre'], request.json['creditos'], codigo)
